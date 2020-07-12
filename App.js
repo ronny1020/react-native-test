@@ -20,13 +20,19 @@ export default function App() {
     },
   ])
 
+  const deleteItem = (id) => {
+    setItems((items) => items.filter((item) => item.id !== id))
+  }
+
   return (
     <View style={styles.container}>
       <Header title="Memo List" />
       <Text style={styles.todoListTitle}>My Todo List</Text>
       <FlatList
         data={items}
-        renderItem={({ item }) => <ListItem item={item} />}
+        renderItem={({ item }) => (
+          <ListItem item={item} deleteItem={deleteItem} />
+        )}
         keyExtractor={(item) => item.id.toString()}
       />
       <StatusBar style="auto" />

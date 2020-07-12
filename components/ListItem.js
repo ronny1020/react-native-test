@@ -7,7 +7,12 @@ export default function ListItem(props) {
     <TouchableOpacity style={styles.listItem}>
       <View style={styles.listItemView}>
         <Text style={styles.listItemText}>{props.item.text}</Text>
-        <Icon name="remove" size={20} color="firebrick" />
+        <Icon
+          name="remove"
+          size={20}
+          color="firebrick"
+          onPress={() => props.deleteItem(props.item.id)}
+        />
       </View>
     </TouchableOpacity>
   )
