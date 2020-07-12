@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
+import AddItem from './components/AddItem'
 import Header from './components/Header'
 import ListItem from './components/ListItem'
 
@@ -20,14 +21,28 @@ export default function App() {
     },
   ])
 
+  const [newId, setNewId] = useState(3)
+
   const deleteItem = (id) => {
     setItems((items) => items.filter((item) => item.id !== id))
+  }
+
+  const addItem = (text) => {
+    setItems([
+      ...items,
+      {
+        id: newId,
+        text: text,
+      },
+    ])
+    setNewId(newId + 1)
   }
 
   return (
     <View style={styles.container}>
       <Header title="Memo List" />
       <Text style={styles.todoListTitle}>My Todo List</Text>
+      <AddItem addItem={addItem} />
       <FlatList
         data={items}
         renderItem={({ item }) => (
